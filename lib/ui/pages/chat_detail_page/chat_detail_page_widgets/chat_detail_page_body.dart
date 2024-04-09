@@ -50,14 +50,14 @@ class ChatDetailPageBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
                         "assets/images/pic/cat.png",
-                        width: 100,
-                        height: 100,
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: MediaQuery.of(context).size.width * 0.25,
                       ),
                     ),
                   );
                 }
 
-                final chatIndex = index - 1; // 프로필 이미지를 고려하여 인덱스 조정
+                final chatIndex = index - 1;
                 bool isMe = chatDetailList[chatIndex]['who'] == 'me';
                 return Row(
                   mainAxisAlignment:
@@ -65,14 +65,19 @@ class ChatDetailPageBody extends StatelessWidget {
                   children: [
                     Flexible(
                       child: Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
                         padding: EdgeInsets.symmetric(vertical: 5),
                         margin: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.grey[200],
                         ),
-                        child: Text(
-                          chatDetailList[chatIndex]['content']!,
-                          maxLines: null,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            chatDetailList[chatIndex]['content']!,
+                            maxLines: null,
+                          ),
                         ),
                       ),
                     ),
@@ -103,68 +108,3 @@ class ChatDetailPageBody extends StatelessWidget {
     );
   }
 }
-
-// class ChatDetailPageBody extends StatelessWidget {
-//   const ChatDetailPageBody({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     List<Map<String, String>> chatDetailList = [
-//       {
-//         "who": "me",
-//         "content": "ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ",
-//       },
-//       {
-//         "who": "you",
-//         "content": "ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ",
-//       },
-//       {
-//         "who": "you",
-//         "content": "ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ",
-//       },
-//       {
-//         "who": "me",
-//         "content": "ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ",
-//       },
-//     ];
-//
-//     return Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Column(
-//         children: [
-//           ClipRRect(
-//             borderRadius: BorderRadius.circular(5),
-//             child: Image.asset(
-//               "assets/images/pic/cat.png",
-//               scale: 3,
-//             ),
-//           ),
-//           Expanded(
-//             child: ListView.builder(
-//               itemCount: chatDetailList.length,
-//               itemBuilder: (context, index) {
-//                 return Container();
-//               },
-//             ),
-//           ),
-//           Row(
-//             children: [
-//               Expanded(
-//                 child: customTextFormField(
-//                   context: context,
-//                   hintText: "메세지를 입력해주세요",
-//                   obscureText: false,
-//                 ),
-//               ),
-//               SizedBox(width: 10),
-//               InkWell(
-//                 onTap: () {},
-//                 child: Icon(Icons.send, size: 30),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

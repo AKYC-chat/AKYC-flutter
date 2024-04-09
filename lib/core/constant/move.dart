@@ -1,6 +1,7 @@
 import 'package:akyc_chat/ui/pages/auth/join_page/join_page.dart';
 import 'package:akyc_chat/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
 import 'package:akyc_chat/ui/pages/auth/login_page/login_page.dart';
+import 'package:akyc_chat/ui/pages/call_page/call_page.dart';
 import 'package:akyc_chat/ui/pages/chat_detail_page/chat_detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,9 @@ class Move {
 
   //채팅상세보기
   static String chatDetailPage = "/chatDetailPage";
+
+  //전화페이지
+  static String callPage = "/callPage";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -25,5 +29,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     //채팅상세보기
     Move.chatDetailPage: (context) => ChatDetailPage(),
+
+    //전화페이지
+    Move.callPage: (context) => CallPage(),
   };
 }
