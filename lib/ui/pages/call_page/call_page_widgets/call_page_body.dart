@@ -36,7 +36,7 @@ class _CallPageBodyState extends State<CallPageBody> {
     'optional': []
   };
 
-  String socketUrlSockJS = "http://localhost:8080/signaling";
+  String socketUrlSockJS = "https://signal.autoaiapp.kr/signaling";
 
   final String _myKey = const Uuid().v4();
   String message = '';
@@ -141,7 +141,7 @@ class _CallPageBodyState extends State<CallPageBody> {
         destination: '/topic/call/key',
         callback: (frame) {
           stompClient.send(
-              destination: '/app/send/key', headers: {}, body: '"$_myKey"');
+              destination: '/web/send/key', headers: {}, body: '"$_myKey"');
         });
 
     stompClient.subscribe(
@@ -187,7 +187,7 @@ class _CallPageBodyState extends State<CallPageBody> {
     if (stompClient.connected) {
       try {
         stompClient.send(
-            destination: '/app/call/key', headers: {}, body: '"$_myKey"');
+            destination: '/web/call/key', headers: {}, body: '"$_myKey"');
       } catch (e) {
         Logger().e("Error sending message: $e");
       }
@@ -204,7 +204,7 @@ class _CallPageBodyState extends State<CallPageBody> {
       Logger().d("Register Offer At $_myKey");
       setLocalAndSendMessage(pc, offer);
       stompClient.send(
-          destination: '/app/peer/offer/$otherKey/$_roomId',
+          destination: '/web/peer/offer/$otherKey/$_roomId',
           headers: {},
           body: body);
     });
@@ -215,7 +215,7 @@ class _CallPageBodyState extends State<CallPageBody> {
       Logger().d("Sending answer At: $otherKey");
       Logger().d("Register answer At $_myKey");
       setLocalAndSendMessage(pc, answer);
-      String destination = '/app/peer/answer/$otherKey/$_roomId';
+      String destination = '/web/peer/answer/$otherKey/$_roomId';
       String jsonAnswer = jsonEncode(answer.toMap());
       String body = '{"key":"$_myKey","body":$jsonAnswer}';
       stompClient.send(destination: destination, headers: {}, body: body);
@@ -237,7 +237,7 @@ class _CallPageBodyState extends State<CallPageBody> {
         String body = '{"key":"$_myKey","body":$jsonIce}';
 
         stompClient.send(
-            destination: '/app/peer/iceCandidate/$otherKey/$_roomId',
+            destination: '/web/peer/iceCandidate/$otherKey/$_roomId',
             headers: {},
             body: body);
       }
